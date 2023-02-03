@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* same as tailwind config */
+:root {
+  --theme-color: #2a282d;
+  --text-color: #121212;
+  --secondary-white: #f5f5f5;
+  --primary-white: #ffffff;
+}
+html {
+  color: var(--text-color);
+  font-size: 16px;
+  line-height: 24px;
+  font-family: "Inter";
+}
+img {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+/* font define */
+@font-face {
+  font-family: "Inter";
+  src: url("../assets/fonts/Inter-Regular.ttf");
+  font-weight: 400;
+}
