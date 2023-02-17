@@ -1,3 +1,4 @@
+//TODO: 更改成你部署RedCoin合约的账户地址
 import RedCoin from 0xae8b87df71d454cb
 
 transaction(newMinterAccount: Address) {

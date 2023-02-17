@@ -1,7 +1,7 @@
-// This transaction is a template for a transaction to allow 
-// anyone to add a Vault resource to their account so that 
+// This transaction is a template for a transaction to allow
+// anyone to add a Vault resource to their account so that
 // they can use the exampleToken
-// TODO: 想要mint token的人的钱包地址需要执行这个transaction来初始化 ExampleToken的存储
+// TODO: 想要mint token的人的钱包地址需要执行这个transaction来初始化 RedCoin 的存储
 import FungibleToken from 0x9a0766d93b6608b7
 import RedCoin from 0xae8b87df71d454cb
 import MetadataViews from 0x631e88ae7f1d7c20
