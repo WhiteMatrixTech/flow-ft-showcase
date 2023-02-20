@@ -239,6 +239,12 @@ pub contract TestCoin: FungibleToken {
         self.ReceiverPublicPath = /public/TestCoinReceiver
         self.AdminStoragePath = /storage/TestCoinAdmin
 
+        // Create a empty TestCoin Vault and put it in storage
+        self.account.save(
+            <-self.createEmptyVault(),
+            to: self.VaultStoragePath
+        )
+
         // Create a public capability to the stored Vault that exposes
         // the `deposit` method through the `Receiver` interface.
         self.account.link<&{FungibleToken.Receiver}>(
@@ -248,7 +254,7 @@ pub contract TestCoin: FungibleToken {
 
         // Create a public capability to the stored Vault that only exposes
         // the `balance` field and the `resolveView` method through the `Balance` interface
-        self.account.link<&TestCoin.Vault{FungibleToken.Balance}>(
+        self.account.link<&TestCoin.Vault{FungibleToken.Balance, MetadataViews.Resolver}>(
             self.VaultPublicPath,
             target: self.VaultStoragePath
         )

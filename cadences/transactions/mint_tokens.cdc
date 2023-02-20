@@ -6,7 +6,7 @@ import MetadataViews from 0x631e88ae7f1d7c20
 
 transaction(amount: UFix64) {
   prepare(signer: AuthAccount) {
-      // Return early if the account already stores a TestCoin Vault
+      // check if the account already stores a TestCoin Vault
       if signer.borrow<&TestCoin.Vault>(from: TestCoin.VaultStoragePath) != nil {
           TestCoinMinter.paymentMint(signer, amount:amount)
           return
