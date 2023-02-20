@@ -2,9 +2,9 @@ import FungibleToken from 0x9a0766d93b6608b7
 import MetadataViews from 0x631e88ae7f1d7c20
 import FungibleTokenMetadataViews from 0x9a0766d93b6608b7
 
-pub contract RedCoin: FungibleToken {
+pub contract TestCoin: FungibleToken {
 
-    /// Total supply of RedCoins in existence
+    /// current supply of TestCoins
     pub var totalSupply: UFix64
 
     /// Storage and Public Paths
@@ -12,10 +12,6 @@ pub contract RedCoin: FungibleToken {
     pub let VaultPublicPath: PublicPath
     pub let ReceiverPublicPath: PublicPath
     pub let AdminStoragePath: StoragePath
-    // The storage Path for minters' MinterProxy
-    pub let MinterProxyStoragePath: StoragePath
-    // The public path for minters' MinterProxy capability
-    pub let MinterProxyPublicPath: PublicPath
 
     /// The event that is emitted when the contract is created
     pub event TokensInitialized(initialSupply: UFix64)
@@ -29,8 +25,14 @@ pub contract RedCoin: FungibleToken {
     /// The event that is emitted when new tokens are minted
     pub event TokensMinted(amount: UFix64)
 
+    /// The event that is emitted when tokens are destroyed
+    pub event TokensBurned(amount: UFix64)
+
     /// The event that is emitted when a new minter resource is created
-    pub event MinterCreated()
+    pub event MinterCreated(allowedAmount: UFix64)
+
+    /// The event that is emitted when a new burner resource is created
+    pub event BurnerCreated()
 
     /// Each user stores an instance of only the Vault in their storage
     /// The functions in the Vault and governed by the pre and post conditions
@@ -77,7 +79,7 @@ pub contract RedCoin: FungibleToken {
         /// @param from: The Vault resource containing the funds that will be deposited
         ///
         pub fun deposit(from: @FungibleToken.Vault) {
-            let vault <- from as! @RedCoin.Vault
+            let vault <- from as! @TestCoin.Vault
             self.balance = self.balance + vault.balance
             emit TokensDeposited(amount: vault.balance, to: self.owner?.address)
             vault.balance = 0.0
@@ -86,11 +88,11 @@ pub contract RedCoin: FungibleToken {
 
         destroy() {
             if self.balance > 0.0 {
-                RedCoin.totalSupply = RedCoin.totalSupply - self.balance
+                TestCoin.totalSupply = TestCoin.totalSupply - self.balance
             }
         }
 
-        /// The way of getting all the Metadata Views implemented by RedCoin
+        /// The way of getting all the Metadata Views implemented by TestCoin
         ///
         /// @return An array of Types defining the implemented views. This value will be used by
         ///         developers to know which parameter to pass to the resolveView() method.
@@ -101,11 +103,11 @@ pub contract RedCoin: FungibleToken {
                     Type<FungibleTokenMetadataViews.FTVaultData>()]
         }
 
-        /// The way of getting a Metadata View out of the RedCoin
+        /// The way of getting a Metadata View out of the TestCoin
         ///
         /// @param view: The Type of the desired view.
         /// @return A structure representing the requested view.
-        /// TODO: 这里可以修改代币的详情，名称，图片，描述等，图片通过nft storage上传到ipfs并获取链接
+        /// TODO: Here you can modify the token details, name, picture, description, etc.
         pub fun resolveView(_ view: Type): AnyStruct? {
             switch view {
                 case Type<FungibleTokenMetadataViews.FTView>():
@@ -116,32 +118,32 @@ pub contract RedCoin: FungibleToken {
                 case Type<FungibleTokenMetadataViews.FTDisplay>():
                     let media = MetadataViews.Media(
                             file: MetadataViews.HTTPFile(
-                            url: "https://bafkreifihrdmxflrn3fjxtlwgp5cfmyqjwhezdkkruznt7acg6mnma7hbu.ipfs.nftstorage.link/"
+                            url: "https://bafkreifihrdmxflrn3fjxtlwgp5cfmyqjwhezdkkruznt7acg6mnma7hbu.ipfs.nftstorage.link"
                         ),
                         mediaType: "image/svg+xml"
                     )
                     let medias = MetadataViews.Medias([media])
                     return FungibleTokenMetadataViews.FTDisplay(
-                        name: "RedCoin",
-                        symbol: "RC",
-                        description: "This fungible token is used as an example to create a coin token which is red color",
-                        externalURL: MetadataViews.ExternalURL("https://www.redcoin.org"),
+                        name: "TestCoin",
+                        symbol: "TC",
+                        description: "TestCoin is a digital cryptocurrency with a current price of 2 flow. It is one of many cryptocurrencies that exist in the decentralized digital currency market.",
+                        externalURL: MetadataViews.ExternalURL("https://example-ft.onflow.org"),
                         logos: medias,
                         socials: {
-                            "twitter": MetadataViews.ExternalURL("https://twitter.com/redcoin")
+                            "twitter": MetadataViews.ExternalURL("https://twitter.com/flow_blockchain")
                         }
                     )
                 case Type<FungibleTokenMetadataViews.FTVaultData>():
                     return FungibleTokenMetadataViews.FTVaultData(
-                        storagePath: RedCoin.VaultStoragePath,
-                        receiverPath: RedCoin.ReceiverPublicPath,
-                        metadataPath: RedCoin.VaultPublicPath,
-                        providerPath: /private/redCoinVault,
-                        receiverLinkedType: Type<&RedCoin.Vault{FungibleToken.Receiver}>(),
-                        metadataLinkedType: Type<&RedCoin.Vault{FungibleToken.Balance, MetadataViews.Resolver}>(),
-                        providerLinkedType: Type<&RedCoin.Vault{FungibleToken.Provider}>(),
-                        createEmptyVaultFunction: (fun (): @RedCoin.Vault {
-                            return <-RedCoin.createEmptyVault()
+                        storagePath: TestCoin.VaultStoragePath,
+                        receiverPath: TestCoin.ReceiverPublicPath,
+                        metadataPath: TestCoin.VaultPublicPath,
+                        providerPath: /private/TestCoinVault,
+                        receiverLinkedType: Type<&TestCoin.Vault{FungibleToken.Receiver}>(),
+                        metadataLinkedType: Type<&TestCoin.Vault{FungibleToken.Balance, MetadataViews.Resolver}>(),
+                        providerLinkedType: Type<&TestCoin.Vault{FungibleToken.Provider}>(),
+                        createEmptyVaultFunction: (fun (): @TestCoin.Vault {
+                            return <-TestCoin.createEmptyVault()
                         })
                     )
             }
@@ -156,95 +158,86 @@ pub contract RedCoin: FungibleToken {
     ///
     /// @return The new Vault resource
     ///
-    pub fun createEmptyVault(): @RedCoin.Vault {
+    pub fun createEmptyVault(): @Vault {
         return <-create Vault(balance: 0.0)
+    }
+
+    pub resource Administrator {
+
+        /// Function that creates and returns a new minter resource
+        ///
+        /// @param allowedAmount: The maximum quantity of tokens that the minter could create
+        /// @return The Minter resource that would allow to mint tokens
+        ///
+        pub fun createNewMinter(allowedAmount: UFix64): @Minter {
+            emit MinterCreated(allowedAmount: allowedAmount)
+            return <-create Minter(allowedAmount: allowedAmount)
+        }
+
+        /// Function that creates and returns a new burner resource
+        ///
+        /// @return The Burner resource
+        ///
+        pub fun createNewBurner(): @Burner {
+            emit BurnerCreated()
+            return <-create Burner()
+        }
     }
 
     /// Resource object that token admin accounts can hold to mint new tokens.
     ///
     pub resource Minter {
+
+        /// The amount of tokens that the minter is allowed to mint
+        pub var allowedAmount: UFix64
+
         /// Function that mints new tokens, adds them to the total supply,
         /// and returns them to the calling context.
         ///
         /// @param amount: The quantity of tokens to mint
         /// @return The Vault resource containing the minted tokens
         ///
-        pub fun mintTokens(amount: UFix64): @RedCoin.Vault {
-            RedCoin.totalSupply = RedCoin.totalSupply + amount
+        pub fun mintTokens(amount: UFix64): @TestCoin.Vault {
+            pre {
+                amount > 0.0: "Amount minted must be greater than zero"
+                amount <= self.allowedAmount: "Amount minted must be less than the allowed amount"
+            }
+            TestCoin.totalSupply = TestCoin.totalSupply + amount
+            self.allowedAmount = self.allowedAmount - amount
             emit TokensMinted(amount: amount)
             return <-create Vault(balance: amount)
         }
-    }
 
-    pub resource interface MinterProxyPublic {
-        pub fun setMinterCapability(cap: Capability<&Minter>)
-    }
-
-    // MinterProxy
-    //
-    // Resource object holding a capability that can be used to mint new tokens.
-    // The resource that this capability represents can be deleted by the admin
-    // in order to unilaterally revoke minting capability if needed.
-    pub resource MinterProxy: MinterProxyPublic {
-
-        // access(self) so nobody else can copy the capability and use it.
-        access(self) var minterCapability: Capability<&Minter>?
-
-        // Anyone can call this, but only the admin can create Minter capabilities,
-        // so the type system constrains this to being called by the admin.
-        pub fun setMinterCapability(cap: Capability<&Minter>) {
-            self.minterCapability = cap
+        init(allowedAmount: UFix64) {
+            self.allowedAmount = allowedAmount
         }
-
-        pub fun mintTokens(amount: UFix64): @RedCoin.Vault {
-            return <- self.minterCapability!
-            .borrow()!
-            .mintTokens(amount:amount)
-        }
-
-        init() {
-            self.minterCapability = nil
-        }
-
     }
 
-    // createMinterProxy
-    //
-    // Function that creates a MinterProxy.
-    // Anyone can call this, but the MinterProxy cannot mint without a Minter capability,
-    // and only the admin can provide that.
-    //
-    pub fun createMinterProxy(): @MinterProxy {
-        return <- create MinterProxy()
-    }
+    /// Resource object that token admin accounts can hold to burn tokens.
+    ///
+    pub resource Burner {
 
-
-    pub resource Administrator {
-
-        /// Function that creates and returns a new minter resource
+        /// Function that destroys a Vault instance, effectively burning the tokens.
         ///
-        /// @return The Minter resource that would allow to mint tokens
+        /// Note: the burned tokens are automatically subtracted from the
+        /// total supply in the Vault destructor.
         ///
-        pub fun createNewMinter(): @Minter {
-            emit MinterCreated()
-            return <-create Minter()
+        /// @param from: The Vault resource containing the tokens to burn
+        ///
+        pub fun burnTokens(from: @FungibleToken.Vault) {
+            let vault <- from as! @TestCoin.Vault
+            let amount = vault.balance
+            destroy vault
+            emit TokensBurned(amount: amount)
         }
     }
-
 
     init() {
-        /// 初始化发行量为0，合约逻辑是没有上限，mint越多，totalSupply越多
         self.totalSupply = 0.0
-        self.VaultStoragePath = /storage/redCoinVault
-        self.VaultPublicPath = /public/redCoinMetadata
-        self.ReceiverPublicPath = /public/redCoinReceiver
-        self.AdminStoragePath = /storage/redCoinAdmin
-        self.MinterProxyPublicPath = /public/redCoinProxy
-        self.MinterProxyStoragePath = /storage/redCoinProxy
-
-        // Create the Vault with the total supply of tokens and save it in storage.
-        let vault <- create Vault(balance: self.totalSupply)
-        self.account.save(<-vault, to: self.VaultStoragePath)
+        self.VaultStoragePath = /storage/TestCoinVault
+        self.VaultPublicPath = /public/TestCoinMetadata
+        self.ReceiverPublicPath = /public/TestCoinReceiver
+        self.AdminStoragePath = /storage/TestCoinAdmin
 
         // Create a public capability to the stored Vault that exposes
         // the `deposit` method through the `Receiver` interface.
@@ -255,7 +248,7 @@ pub contract RedCoin: FungibleToken {
 
         // Create a public capability to the stored Vault that only exposes
         // the `balance` field and the `resolveView` method through the `Balance` interface
-        self.account.link<&RedCoin.Vault{FungibleToken.Balance}>(
+        self.account.link<&TestCoin.Vault{FungibleToken.Balance}>(
             self.VaultPublicPath,
             target: self.VaultStoragePath
         )
