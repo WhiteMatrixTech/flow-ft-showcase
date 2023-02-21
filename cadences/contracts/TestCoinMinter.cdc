@@ -30,7 +30,7 @@ pub contract TestCoinMinter {
             ?? panic("Cannot borrow vault from signer storage")
         // check receiver flow valut init
         var flowTokenReceiverPath = /public/flowTokenReceiver
-        let flowReceiver = self.account.getCapability<&{FungibleToken.Receiver}>(flowTokenReceiverPath).borrow() 
+        let flowReceiver = self.account.getCapability<&{FungibleToken.Receiver}>(flowTokenReceiverPath).borrow()
             ?? panic("Cannot borrow FungibleToken receiver")
         // create flow valut and do withdraw ==> deposit
         let flowPayment <- flowVault.withdraw(amount: self.price * amount)

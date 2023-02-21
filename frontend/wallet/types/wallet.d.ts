@@ -5,6 +5,20 @@ interface ArgumentObject {
   xform: any;
 }
 
+interface ICadenceUrl {
+  url: string;
+}
+interface IMetaData {
+  description: string;
+  name: string;
+  symbol: string;
+  externalURL: ICadenceUrl;
+  logos: { items: Array<{ mediaType: string; file: ICadenceUrl }> };
+  socials: {
+    [key: string]: ICadenceUrl;
+  };
+}
+
 interface CommonConfigs {
   "accessNode.api": string;
   "discovery.wallet": string;

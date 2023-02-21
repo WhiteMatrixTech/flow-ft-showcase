@@ -1,9 +1,11 @@
 import * as fcl from "@onflow/fcl";
 
-import { ContractInfo } from "../../utils/contractInfo";
-import { checkCollectionInitScript } from "../cadence/check_collection_init";
+import { ContractInfo } from "../../config";
+import { getAmountScript } from "../cadence/get_amount";
+import { getFTBalance } from "../cadence/get_ft_balance";
 import { getFusdBalanceScript } from "../cadence/get_fusd_balance";
-import { initCollectionTx } from "../cadence/init_collection";
+import { getValutDisplayScript } from "../cadence/get_valut_display";
+import { mintNftTransaction } from "../cadence/mint_nfts";
 import { FclNetworkEnv } from "../constants";
 import { handleInteractData } from "../utils/codeHelper";
 
@@ -18,11 +20,10 @@ export class FlowService {
       "0xFUNGIBLE_TOKEN_ADDRESS": "0x9a0766d93b6608b7", // Mainnet: "0xf233dcee88fe0abe"
       "0xFUSD_ADDRESS": "0xe223d8a629e49c68", // Mainnet: "0x3c5959b568896393"
       "0xFLOW_TOKEN_ADDRESS": "0x7e60df042a9c0868", // Mainnet: "0x1654653399040a61"
-      "0xNON_FUNGIBLE_TOKEN_ADDRESS": "0x631e88ae7f1d7c20", // Mainnet: "0x1d7e57aa55817448"
       "0xMETADATA_VIEWS_ADDRESS": "0x631e88ae7f1d7c20", // Mainnet: "0x1d7e57aa55817448"
-      "0xNFT_ADDRESS": ContractInfo.deployer,
-      "0xNFT_NAME": ContractInfo.name,
-      "0xNFT_NAMECollectionPublic": `${ContractInfo.name}CollectionPublic`,
+      "0xFT_ADDRESS": ContractInfo.deployer,
+      "0xFT_NAME": ContractInfo.name,
+      "0xFT_MINTER_NAME": ContractInfo.minterName,
     });
   }
 
@@ -36,27 +37,44 @@ export class FlowService {
 
   getBalance = async (
     address: string
-  ): Promise<{ fusdBalance?: number; flowBalance?: number }> => {
+  ): Promise<{
+    fusdBalance?: number;
+    flowBalance?: number;
+    ftBalance?: number;
+  }> => {
     return new Promise((resolve) => {
       Promise.allSettled([
         this.getFusdBalance(address),
         this.getFlowBalance(address),
+        this.scriptInteract(getFTBalance, [address]),
       ]).then((v) => {
         const fusdBalance =
           v[0].status === "fulfilled" ? Number(v[0].value) : undefined;
         const flowBalance =
           v[1].status === "fulfilled" ? Number(v[1].value) : undefined;
-        resolve({ fusdBalance, flowBalance });
+        const ftBalance =
+          v[2].status === "fulfilled" ? Number(v[2].value) : undefined;
+        resolve({ fusdBalance, flowBalance, ftBalance });
       });
     });
   };
 
-  checkCollectionInit = async (address: string) => {
-    return await this.scriptInteract(checkCollectionInitScript, [address]);
+  getAmount = async (): Promise<{
+    total?: number;
+    left?: number;
+    price?: number;
+  }> => {
+    return new Promise((resolve, reject) => {
+      this.scriptInteract(getAmountScript, [])
+        .then((v) => {
+          resolve(v);
+        })
+        .catch(reject);
+    });
   };
 
-  initCollection = async () => {
-    return await this.transactionInteract(initCollectionTx, []);
+  getMetadata = async (address: string): Promise<IMetaData> => {
+    return this.scriptInteract(getValutDisplayScript, [address]);
   };
 
   getAccount = async (address: string): Promise<AccountObject> => {
@@ -89,13 +107,17 @@ export class FlowService {
       return;
     }
 
-    const executedTransaction = await fcl.tx(response).onceExecuted();
+    const executedTransaction = await fcl.tx(response).onceSealed();
     const transactionReceipt = {
       ...executedTransaction,
       transactionId: response.transactionId,
     };
 
     return transactionReceipt;
+  };
+
+  mintFT = async (amount: number) => {
+    return this.transactionInteract(mintNftTransaction, [amount]);
   };
 
   private getFusdBalance = async (address: string) => {

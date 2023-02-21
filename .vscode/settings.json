@@ -62,6 +62,7 @@
     "toastify",
     "unauthenticate",
     "unoptimized",
+    "Valut",
     "xform"
   ],
   "css.lint.unknownAtRules": "ignore"

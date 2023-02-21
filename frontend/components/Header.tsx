@@ -19,10 +19,12 @@ export function Header() {
     user,
     fusdBalance,
     flowBalance,
+    ftBalance,
     isRefreshingBalance,
     refreshBalance,
     logOut,
     logIn,
+    metadata,
   } = useWallet();
 
   const accountRef = useRef(null);
@@ -50,11 +52,6 @@ export function Header() {
         alt="user"
         src={userLogo}
         className="w-[21px] cursor-pointer"
-        onMouseEnter={() => {
-          if (user?.addr) {
-            setShowAccountDetail(true);
-          }
-        }}
         onClick={() => {
           if (!user?.addr) {
             logIn();
@@ -103,7 +100,7 @@ export function Header() {
                 <Skeleton className="w-20 h-5" count={1} />
               ) : (
                 <span className="text-[20px] leading-[23px] font-bold">
-                  {flowBalance === undefined ? "" : flowBalance.toFixed(2)}
+                  {flowBalance === undefined ? "0.00" : flowBalance.toFixed(2)}
                 </span>
               )}
             </div>
@@ -116,18 +113,20 @@ export function Header() {
                 <Skeleton className="w-20 h-5" count={1} />
               ) : (
                 <span className="text-[20px] leading-[23px] font-bold">
-                  {fusdBalance === undefined ? "" : fusdBalance.toFixed(2)}
+                  {fusdBalance === undefined ? "0.00" : fusdBalance.toFixed(2)}
                 </span>
               )}
             </div>
-            {/* TC balance */}
+            {/* FT balance */}
             <div className="w-full flex items-center justify-between">
-              <span className="text-[#232323] text-sm leading-[21px]">TC</span>
+              <span className="text-[#232323] text-sm leading-[21px]">
+                {metadata?.name}
+              </span>
               {isRefreshingBalance ? (
                 <Skeleton className="w-20 h-5" count={1} />
               ) : (
                 <span className="text-[20px] leading-[23px] font-bold">
-                  {fusdBalance === undefined ? "" : fusdBalance.toFixed(2)}
+                  {ftBalance === undefined ? "0" : ftBalance.toFixed(0)}
                 </span>
               )}
             </div>
