@@ -44,7 +44,7 @@
 浏览器会打开如下页面
 ![image](https://user-images.githubusercontent.com/66669483/221515696-eadf4a76-cad5-4e8a-a6ca-5a4477e04fab.png)
 
-5、由于前端实际上是在`terminal`环境内，因此只能使用`blocto`钱包登录，这里切换一个另一个钱包地址，登录成功后可以看到价格和供应量从合约中读取成功
+5、由于前端实际上是在`terminal`环境内，因此只能使用`blocto`钱包登录，这里切换另一个钱包地址，登录成功后可以看到价格和供应量从合约中读取成功
 ![image](https://user-images.githubusercontent.com/66669483/221517374-05676136-3648-4042-b07e-2597d888fc73.png)
 
 6、点击`BUY TC`执行`mint`，如果钱包`Flow`余额不足，可以从 https://testnet-faucet-v2.onflow.org/fund-account 中获取测试代币，`mint`过后，可以看到，剩余`NFT`数量和`Flow`代币的数值均有对应变化
