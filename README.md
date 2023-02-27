@@ -33,7 +33,7 @@
 
 ![image](https://user-images.githubusercontent.com/66669483/221506529-ce4da4f2-43a1-4f83-a70a-06998876f489.png)
 
-3、打开左边端口转发面板，选择`npm`镜像，选择`flow-cli`镜像，输入端口号3000，点击`Add`
+3、打开左边端口转发面板，选择`flow-cli`镜像，输入端口号3000，点击`Add`
 ![image](https://user-images.githubusercontent.com/66669483/221507031-167bc9af-e5a2-42d0-89c3-9d4e3dfe47b0.png)
 
 4、添加成功后，表格里会多一条3000端口的记录，点击图示按钮，用浏览器打开
