@@ -9,7 +9,7 @@
 ### 合约部署
 
 1、登录`ChainIDE`并且`Github`克隆项目 https://github.com/WhiteMatrixTech/flow-ft-showcase.git
-![image](https://user-images.githubusercontent.com/66669483/221511983-208b4c78-3f7b-4736-ae4d-fdbdc0efa095.png)
+![image](https://user-images.githubusercontent.com/66669483/221518266-93aaa9fa-85b9-4f5d-a953-652ad1fe38c1.png)
 
 2、打开克隆后的项目，打开右侧的的面板，登录`Testnet`
 ![image](https://user-images.githubusercontent.com/66669483/221512653-bce7b325-b95a-4222-83df-7f14789f1ac9.png)
