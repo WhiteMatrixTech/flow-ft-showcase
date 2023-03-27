@@ -1,6 +1,6 @@
 // TODO: change to your wallet which deploy TestCoin contract
-import TestCoin from 0xa7a5232f79c086a5
-import FungibleToken from 0x9a0766d93b6608b7
+import TestCoin from 0xa7a5232f79c086a5 
+import FungibleToken from 0x9a0766d93b6608b7 //Mainnet Address: 0xf233dcee88fe0abe
 
 pub contract TestCoinMinter {
     // max supply of TestCoin
