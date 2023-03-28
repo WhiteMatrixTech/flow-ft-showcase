@@ -13,7 +13,7 @@ export class FlowService {
   constructor() {
     fcl.config({
       env: FclNetworkEnv.Testnet, //Mainnet: FclNetworkEnv.Mainnet
-      "accessNode.api": "https://rest-testnet.onflow.org", // Mainnet: "https://rest-mainnet.onflow.org/"
+      "accessNode.api": "https://rest-testnet.onflow.org", // Mainnet: "https://rest-mainnet.onflow.org"
       "discovery.wallet": "https://fcl-discovery.onflow.org/testnet/authn", // Mainnet: "https://fcl-discovery.onflow.org/authn"
       "app.detail.title": "Flow NFT ShowCase",
       "app.detail.icon": "https://developers.flow.com/favicon.ico",
