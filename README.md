@@ -16,7 +16,6 @@
 
 4. 在主网上部署
 
-   
 
 ### 1 使用 Flow 钱包并获取测试币
 
@@ -96,7 +95,7 @@ import FungibleTokenMetadataViews from 0x9a0766d93b6608b7
 
 添加成功后，表格里会多一条3000端口的记录，点击图示按钮，用浏览器打开
 
-![image-20230313094756154](./flow-nft.assets/image-20230313094756154.png)
+![image-20230313094756154](./flow-ft.assets/image-20230313094756154.png)
 
 浏览器会打开如下页面
 ![image-20230313181617743](./flow-ft.assets/image-20230313181617743.png)
@@ -116,15 +115,15 @@ import FungibleTokenMetadataViews from 0x9a0766d93b6608b7
 
 #### 1 连接主网
 
-![image-20230328100730940](C:/Users/W/Desktop/flow/flow-ft%20.assets/image-20230328100730940.png)
+![image-20230328100730940](./flow-ft.assets/image-20230328100730940.png)
 
 #### 2 替换智能合约 import contract 的地址为主网地址
 
 打开 `cadences/contracts`
 
-![image-20230328105642197](C:/Users/W/Desktop/flow/flow-ft%20.assets/image-20230328105642197.png)
+![image-20230328105642197](./flow-ft.assets/image-20230328105642197.png)
 
-![image-20230328110053414](C:/Users/W/Desktop/flow/flow-ft%20.assets/image-20230328110053414.png)
+![image-20230328110053414](./flow-ft.assets/image-20230328110053414.png)
 
 #### 3 替换前端页面 flow.ts 配置信息
 
@@ -132,7 +131,7 @@ import FungibleTokenMetadataViews from 0x9a0766d93b6608b7
 
 将 //Mainnet 后的内容替换到前方对应的代码中
 
-![image-20230328102925859](C:/Users/W/Desktop/flow/flow-ft%20.assets/image-20230328102925859.png)
+![image-20230328102925859](./flow-ft.assets/image-20230328102925859.png)
 
-这样你就可以在主网上发行 NFT 了
+这样你就可以在主网上发行 FT 了
 恭喜，你已经完成了本教程的所有内容！
