@@ -12,7 +12,7 @@ import { handleInteractData } from "../utils/codeHelper";
 export class FlowService {
   constructor() {
     fcl.config({
-      env: FclNetworkEnv.Testnet,
+      env: FclNetworkEnv.Testnet, //Mainnet: FclNetworkEnv.Mainnet
       "accessNode.api": "https://rest-testnet.onflow.org", // Mainnet: "https://rest-mainnet.onflow.org/"
       "discovery.wallet": "https://fcl-discovery.onflow.org/testnet/authn", // Mainnet: "https://fcl-discovery.onflow.org/authn"
       "app.detail.title": "Flow NFT ShowCase",
