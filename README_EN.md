@@ -21,11 +21,11 @@ When you deploy a smart contract on the blockchain or interact with deployed sma
 
 On the right side of the ChainIDE Flow programming page, select Testnet and click Authenticate.
 
-![image-20230312205320888](https://raw.githubusercontent.com/WhiteMatrixTech/flow-ft-showcase/main/flow-ft.assets/image-20230312205320888.png)
+![image-20230312205320888](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230312205320888.png)
 
 👉 Select Blocto from the options.
 
-![Blocto wallet option](https://raw.githubusercontent.com/WhiteMatrixTech/flow-ft-showcase/main/flow-ft.assets/image-20230315154505744.png)
+![Blocto wallet option](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230315154505744.png)
 
 👉 Register for an account and fund your wallet
 
@@ -33,7 +33,7 @@ On the right side of the ChainIDE Flow programming page, select Testnet and clic
 
 💰 Next, click on the 'copy wallet address' button and navigate to the [Flow Faucet](https://testnet-faucet.onflow.org/fund-account) to paste your copied address. Select FLOW by default, complete hCaptcha authentication, and click 'FUND YOUR ACCOUNT' to receive 1000 Flow test coins.
 
-![Flow Faucet](https://raw.githubusercontent.com/WhiteMatrixTech/flow-ft-showcase/main/flow-ft.assets/image-20230312205910626.png)
+![Flow Faucet](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230312205910626.png)
 
 ## 2. 🛠️ Deploy the NFT smart contract
 
