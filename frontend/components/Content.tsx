@@ -130,9 +130,9 @@ export function Content() {
               className="text-[#F0B90B] font-bold cursor-pointer"
               onClick={() => {
                 window.open(
-                  `https://testnet.flowscan.org/contract/A.${flowAddressUtils.sansPrefix(
+                  `https://testnet.flowdiver.io/contract/A.${flowAddressUtils.sansPrefix(
                     ContractInfo.deployer
-                  )}.${ContractInfo.name}/overview`,
+                  )}.${ContractInfo.name}`,
                   "_blank"
                 );
               }}

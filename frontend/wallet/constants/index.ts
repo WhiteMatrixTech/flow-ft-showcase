@@ -12,11 +12,4 @@ enum CADENCE_CODE_TYPE {
   UNKNOWN = "unknown",
 }
 
-const FlowNetScan = {
-  [FclNetworkEnv.Mainnet]: "https://flowscan.org/",
-  [FclNetworkEnv.Testnet]: "https://testnet.flowscan.org/",
-  [FclNetworkEnv.Canarynet]: "",
-  [FclNetworkEnv.Local]: "",
-};
-
-export { CADENCE_CODE_TYPE, FclNetworkEnv, FlowNetScan };
+export { CADENCE_CODE_TYPE, FclNetworkEnv };

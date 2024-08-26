@@ -3,5 +3,5 @@ export const ContractInfo = {
   name: "TestCoin",
   minterName: "TestCoinMinter",
   // with 0x prefix
-  deployer: "0xb42ca9f282e64b14",
+  deployer: "0x3f0e550d481207e3",
 };

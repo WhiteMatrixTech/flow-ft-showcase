@@ -74,7 +74,7 @@ export class FlowService {
   };
 
   getMetadata = async (address: string): Promise<IMetaData> => {
-    return this.scriptInteract(getValutDisplayScript, [address]);
+    return await this.scriptInteract(getValutDisplayScript, []);
   };
 
   getAccount = async (address: string): Promise<AccountObject> => {
