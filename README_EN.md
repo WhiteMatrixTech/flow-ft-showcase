@@ -23,11 +23,9 @@ On the right side of the ChainIDE Flow programming page, select Testnet and clic
 
 ![image-20230312205320888](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230312205320888.png)
 
-👉 Select Blocto from the options.
+👉 Select Wallet from the options.
 
-![Blocto wallet option](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230315154505744.png)
-
-👉 Register for an account and fund your wallet
+![image-20230312205623790](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230312205623790.png)
 
 🔑 First, enter your email address and register for an account on [Selecte Blocto](https://blocto.com/).
 
@@ -56,21 +54,27 @@ Modify the parameters in `frontend/config.ts`. If the contract name has not been
 
 ![](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313180548039.png)
 
-Open Sandbox flow-cli, execute `cd frontend && npm install && npm start`
+Open `Sandbox` `Flow (Ubuntu)` , execute 
 
-![](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313180621678.png)
+```bash
+cd frontend  
+yarn  
+yarn start
+```
 
-![](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313180746507.png)
+![image-20230313180621678](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313180621678.png)
 
-![](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313181454982.png)
+![image-20230313180746507](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313180746507.png)
 
-Open the port forwarding panel on the left, select the flow-cli image, enter the port number 3000, and click Add 🔍
+![image-20230313181454982](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313181454982.png)
 
-![](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313181534845.png)
+Open the port forwarding panel on the left, select the Flow (Ubuntu) image, Protocol: HTTP, input port number 3000, and click Add. and click Add 🔍
+
+![image](https://github.com/user-attachments/assets/d5ab700a-4c9f-41ab-9e63-e54f45c248b5)
 
 After the addition is successful, there will be an additional record of port 3000 in the table, click the icon button to open it with a browser 🌐
 
-![](https://d3gvnlbntpm4ho.cloudfront.net/Fungible-Token_on_Flow/flow-ft.assets/image-20230313094756154.png)
+![image](https://github.com/user-attachments/assets/046cdf07-8027-4c7a-b35f-4be1603ad7de)
 
 The browser will open the following page 👇
 
